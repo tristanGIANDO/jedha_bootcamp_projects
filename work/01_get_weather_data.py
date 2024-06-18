@@ -6,11 +6,6 @@ import envs
 
 load_dotenv(find_dotenv("./.env"))
 
-"""PATTERN
-https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}
-&exclude={part}&appid={API key}
-"""
-
 
 class WeatherData:
     def __init__(self, cities: list[str]) -> None:

@@ -17,4 +17,4 @@ The application should then be able to recommend the best destinations and hotel
 
 * Une base de données SQL où nous devrions pouvoir obtenir les mêmes données nettoyées de S3
 
-* Deux cartes où vous devriez avoir un Top-5 des destinations et un Top-20 des hôtels de la région.
+* Deux cartes où vous devriez avoir un Top-5 des destinations et un Top-20 des hôtels de la région. (Faire un subplot avec ordered menu qui est paramétré en fonction des top 5 cities)
