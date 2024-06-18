@@ -5,7 +5,8 @@ class BookingSpider(scrapy.Spider):
     name = "booking"
     allowed_domains = ["booking.com"]
     start_urls = [
-        "https://www.booking.com/searchresults.html?ss=Montpellier"
+        "https://www.booking.com/searchresults.html?ss=Montpellier",
+        "https://www.booking.com/searchresults.html?ss=Grenoble"
     ]
 
     custom_settings = {
