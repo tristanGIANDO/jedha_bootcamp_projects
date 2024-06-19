@@ -5,6 +5,7 @@ from plotly.subplots import make_subplots
 x1 = ['A', 'B', 'C']
 y1 = [10, 20, 30]
 
+
 # Données pour le deuxième graphique en barres
 x2 = ['D', 'E', 'F']
 y2 = [15, 25, 35]
