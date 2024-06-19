@@ -24,5 +24,5 @@ for file in filenames:
         raise ValueError()
 
     data = pd.read_csv(path)
-    csv = data.to_csv()
+    csv = data.to_csv(index=False)
     put_object = bucket.put_object(Key=file, Body=csv)

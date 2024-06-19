@@ -1,20 +1,19 @@
-# trip_with_kayak
+# JEDHA BOOTCAMP PROJECTS
 
-The application should then be able to recommend the best destinations and hotels based on the above variables at any given time.
+## Installation
 
-1. Obtenir coordonnees GPS via nominatim.org
-2. obtenir infos sur la meteo et les mettre dans un Dataframe
-3. Trouver les meilleures villes pour les 7 jours a venir
-4. Enregistrer les resultats dans un fichier .csv (id, city)
-5. plotly carte des destinations
-6. scraper Booking
-7. stocker le fichier CSV dans S3
-8. creer database et stocker les donnees dans la database avec SQL
+```bash
+virtualenv -p python3 venv
+. venv/bin/activate
+pip install -r requirements.txt
+```
 
-## Delivery
+Add a `.env` file with :
 
-* Un fichier .csv dans un bucket S3 contenant des informations enrichies sur la météo et les hôtels de chaque ville française
-
-* Une base de données SQL où nous devrions pouvoir obtenir les mêmes données nettoyées de S3
-
-* Deux cartes où vous devriez avoir un Top-5 des destinations et un Top-20 des hôtels de la région. (Faire un subplot avec ordered menu qui est paramétré en fonction des top 5 cities)
+```js
+WEATHER_USERNAME=fill_this
+WEATHER_PASSWORD=fill_this
+WEATHER_KEY=fill_this
+AWS_KEY=fill_this
+AWS_SECRET=fill_this
+```
