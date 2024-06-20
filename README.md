@@ -4,11 +4,11 @@ This repository contains all the projects needed to validate the certification b
 
 ## Contents
 * **Block 1** - Build & Manage a Data Infrastructure
-  * _Data Collection and Management project (Kayak)_
+  * _Data Collection and Management Project (Kayak)_
 
 * **Block 2** - Exploratory Data Analysis
-  * _Exploratory Data Analysis project (Speed Dating)_
-  * _Big Data project_
+  * _Exploratory Data Analysis Project (Speed Dating)_
+  * _Big Data Project_
 
 * **Block 3** - Machine Learning
   * _Supervised Machine Learning Project_
