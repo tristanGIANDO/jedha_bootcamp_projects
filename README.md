@@ -11,9 +11,18 @@ This repository contains all the projects needed to validate the certification b
   * _Big Data project_
 
 * **Block 3** - Machine Learning
+  * _Supervised Machine Learning Project_
+  * _Supervised Machine Learning Project_
+  * _Unsupervised Machine Learning Project_
+ 
 * **Block 4** - Deep Learning
+  * _Deep Learning Project_
+
 * **Block 5** - Deployment
+  * _Deployment Project_
+
 * **Block 6** - Lead a data project
+  * _Final Project_
 
 ---
 
