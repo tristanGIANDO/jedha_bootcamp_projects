@@ -8,22 +8,37 @@ load_dotenv(find_dotenv("./.env"))
 BUCKET_NAME = "tgiandoriggio-bucket-kayak-01"
 KEYS = ["weather_data.csv", "hotel_data.csv"]
 
-# init session and bucket
-session = boto3.Session(aws_access_key_id=os.getenv("AWS_KEY"),
-                        aws_secret_access_key=os.getenv("AWS_SECRET"))
 
-s3 = session.resource("s3")
-bucket = s3.Bucket(BUCKET_NAME)
+def get_dataframes_from_s3() -> list[pd.DataFrame, pd.DataFrame]:
+    # init session and bucket
+    session = boto3.Session(aws_access_key_id=os.getenv("AWS_KEY"),
+                            aws_secret_access_key=os.getenv("AWS_SECRET"))
 
-for obj in bucket.objects.all():
-    file_key = obj.key
-    file_path = "C:/Users/giand/AppData/Local/Temp/" + file_key
+    s3 = session.resource("s3")
+    bucket = s3.Bucket(BUCKET_NAME)
 
-    try:
-        bucket.download_file(file_key, file_path)
+    dataframes = []
+    for obj in bucket.objects.all():
+        file_key = obj.key
+        file_path = "C:/Users/giand/AppData/Local/Temp/" + file_key
 
-        df = pd.read_csv(file_path)
-        print(df.head())
+        try:
+            bucket.download_file(file_key, file_path)
+            dataframes.append(pd.read_csv(file_path))
 
-    except Exception as e:
-        print(f"{file_key} -> {e}")
+        except Exception as e:
+            print(f"{file_key} -> {e}")
+
+    return dataframes
+
+
+hotel_df, weather_df = get_dataframes_from_s3()
+
+# CLEAN HOTEL DATAFRAME
+print(hotel_df.info())
+
+hotel_df["city"] = hotel_df["city"].replace("%20", " ")
+print(hotel_df.head())
+
+# CLEAN WEATHER DATAFRAME
+print(weather_df.info())
