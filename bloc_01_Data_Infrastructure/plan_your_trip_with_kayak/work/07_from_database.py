@@ -46,7 +46,6 @@ def get_best_hotels() -> pd.DataFrame:
 
 
 def create_best_cities_figure(df: pd.DataFrame) -> go.Figure:
-    # Top cities map
     cities_map = go.Figure(go.Scattermapbox(
         lat=df["latitude"],
         lon=df["longitude"],
@@ -67,11 +66,10 @@ def create_best_cities_figure(df: pd.DataFrame) -> go.Figure:
         mapbox=dict(
             style='open-street-map',
             zoom=5,
-            center=dict(lat=df['latitude'].mean(),
-                        lon=df['longitude'].mean())
+            center=dict(lat=df['latitude'].mean(), lon=df['longitude'].mean())
         ),
         title={
-            "text": "<b>Top 5 destinations orecast</b>",
+            "text": "<b>Top 5 destinations forecast</b>",
             "x": 0.5
         },
         margin={"r": 0, "t": 50, "l": 0, "b": 0}
@@ -85,7 +83,6 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
                    .agg({"latitude": "mean", "longitude": "mean"}) \
                    .reset_index()
 
-    # Création de la carte initiale avec les hôtels marqués
     fig = go.Figure()
 
     fig.add_trace(
@@ -106,7 +103,6 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
         )
     )
 
-    # Définition de la mise en page initiale de la carte
     fig.update_layout(
         title=go.layout.Title(text="Top 20 best hotels", x=0.5),
         showlegend=True,
@@ -117,22 +113,19 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
         )
     )
 
-    # Création des boutons pour chaque ville
     buttons = [
         go.layout.updatemenu.Button(
             label=str(r["city_id"]),
             method="update",
-            args=[{"visible": True}, {
-                "mapbox": {
+            args=[
+                {"visible": True},
+                {"mapbox": {
                     "style": "open-street-map",
                     "zoom": 12,
-                    "center": {"lat": r["latitude"], "lon": r["longitude"]}
-                }
-            }]
+                    "center": {"lat": r["latitude"], "lon": r["longitude"]}}}]
         ) for _, r in coords_df.iterrows()
     ]
 
-    # Ajout des boutons à la mise en page de la figure
     fig.update_layout(
         updatemenus=[go.layout.Updatemenu(buttons=buttons)]
     )
@@ -140,51 +133,11 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
     return fig
 
 
-"""
-top_cities_df = get_best_cities()
-top_cities_fig = create_best_cities_figure(top_cities_df)
-"""
-top_hotels_df = get_best_hotels()
-top_hotels_fig = create_best_hotels_figure(top_hotels_df)
-top_hotels_fig.show()
+df_cities = get_best_cities()
+fig_cities = create_best_cities_figure(df_cities)
 
-# # Create subplots
-# fig = make_subplots(
-#     rows=1, cols=2,
-#     column_widths=[0.5, 0.5],
-#     specs=[[{"type": "scattermapbox"}, {"type": "scattermapbox"}]]
-# )
+df_hotels = get_best_hotels()
+fig_hotels = create_best_hotels_figure(df_hotels)
 
-# for trace in top_cities_fig.data:
-#     fig.add_trace(trace, row=1, col=1)
-
-# fig.update_layout(
-#     height=800,
-#     mapbox1=dict(
-#         style="open-street-map",
-#         zoom=5,
-#         center=dict(lat=top_cities_df['latitude'].mean(),
-#                     lon=top_cities_df['longitude'].mean())
-#     ),
-#     mapbox2=dict(
-#         style="open-street-map",
-#         zoom=5,
-#         center=dict(lat=top_cities_df['latitude'].mean(),
-#                     lon=top_cities_df['longitude'].mean())
-#     ),
-#     title={
-#         "text": "<b>Top 5 destinations according to the weather forecast</b>",
-#         "x": 0.5},
-#     margin={"r": 0, "t": 50, "l": 0, "b": 0}
-# )
-
-# fig.show()
-
-
-# if __name__ == "__main__":
-#     df = get_best_hotels()
-#     coords_df = df.groupby("city_id") \
-#         .agg({"latitude": "mean", "longitude": "mean"}) \
-#         .reset_index()
-
-#     print(len(coords_df))
+fig_cities.show()
+fig_hotels.show()
