@@ -1,10 +1,12 @@
-import os
+from pathlib import Path
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
-df = pd.read_csv(os.path.join(os.path.dirname(__file__),
-                              "csv_files",
-                              "weather_data.csv"))
+root = Path(__file__).parent / "csv_files"
+
+df = pd.read_csv(root / "weather_data.csv")
 
 # find best city each day
 ordered_df = df.groupby("day_id").apply(
@@ -12,7 +14,8 @@ ordered_df = df.groupby("day_id").apply(
                             ascending=[False, True, True, True]
                             ).head(5)).reset_index(drop=True)
 
-# create figure
+print(ordered_df)
+# create top 5 map of the cities
 fig = px.scatter_mapbox(
     ordered_df,
     lat="lat",

@@ -2,7 +2,8 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv, find_dotenv
 import pandas as pd
-from sqlalchemy import create_engine, text, Column, Integer, String, Float, ForeignKey
+from sqlalchemy import create_engine, text
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 
@@ -65,7 +66,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 # Read CSV files
-root = Path(r"C:\Users\giand\OneDrive\Documents\__packages__\jedha\jedha_bootcamp_projects\bloc_01_Data_Infrastructure\plan_your_trip_with_kayak\work\csv_files")
+root = Path(__file__).parent / "csv_files"
 
 
 def read_csv(file: Path) -> pd.DataFrame:
