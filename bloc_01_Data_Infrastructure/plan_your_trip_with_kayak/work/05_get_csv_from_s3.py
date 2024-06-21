@@ -34,11 +34,5 @@ def get_dataframes_from_s3() -> list[pd.DataFrame, pd.DataFrame]:
 
 hotel_df, weather_df = get_dataframes_from_s3()
 
-# CLEAN HOTEL DATAFRAME
-print(hotel_df.info())
-
-hotel_df["city"] = hotel_df["city"].replace("%20", " ")
 print(hotel_df.head())
-
-# CLEAN WEATHER DATAFRAME
-print(weather_df.info())
+print(weather_df.head())
