@@ -19,20 +19,33 @@ hotels_df = pd.read_sql("SELECT * FROM hotels", conn)
 conn.close()
 
 
-def get_best_cities(filter_number: int = 5) -> pd.DataFrame:
+def get_best_cities() -> pd.DataFrame:
     # Merge dataframes : weather_df["city_id"] -> cities_df["id"]
     merged_df = pd.merge(weather_df, cities_df,
                          left_on="city_id", right_on="id",
                          suffixes=("_weather", "_city"))
     merged_df = merged_df.drop(columns=["id_city", "id_weather"])  # duplicates
 
+    avg_df = merged_df.groupby(["city_id", "city", "latitude", "longitude"]) \
+        .agg({"temp_max": "mean",
+              "humidity": "mean",
+              "clouds": "mean",
+              "rain_prob": "mean"}) \
+        .reset_index()
+
+    avg_df = avg_df.sort_values(
+        by=["temp_max", "humidity", "clouds", "rain_prob"],
+        ascending=[False, True, True, True]).head(10)
+
+    return avg_df
+
     # Best cities each day
-    return merged_df.groupby("day_id", as_index=False) \
-        .apply(
-            lambda x: x.sort_values(
-                by=["temp_max", "humidity", "clouds", "rain_prob"],
-                ascending=[False, True, True, True]).head(filter_number)) \
-        .reset_index(drop=True)
+    # return merged_df.groupby("day_id", as_index=False) \
+    #     .apply(
+    #         lambda x: x.sort_values(
+    #             by=["temp_max", "humidity", "clouds", "rain_prob"],
+    #             ascending=[False, True, True, True]).head(5)) \
+    #     .reset_index(drop=True)
 
 
 def get_best_hotels() -> pd.DataFrame:
@@ -53,8 +66,9 @@ def create_best_cities_figure(df: pd.DataFrame) -> go.Figure:
         marker=dict(
             size=df["temp_max"],
             color=df["temp_max"],
-            colorscale="hot",
+            colorscale="bluered",
             showscale=True,
+            colorbar=dict(title="Max Temperature"),
             sizemode="area",
             sizeref=2.*max(df['temp_max'])/(35.**2),
             sizemin=4
@@ -98,7 +112,7 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
             marker=dict(
                 size=df["rating"],
                 color=df["rating"],
-                colorscale="viridis",
+                colorscale="hot",
                 showscale=True,
                 sizemode="area",
                 sizeref=2.*max(df['rating'])/(35.**2),
