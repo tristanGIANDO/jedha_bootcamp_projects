@@ -112,7 +112,7 @@ def create_best_hotels_figure(df: pd.DataFrame) -> go.Figure:
             marker=dict(
                 size=df["rating"],
                 color=df["rating"],
-                colorscale="hot",
+                colorscale="blues",
                 showscale=True,
                 sizemode="area",
                 sizeref=2.*max(df['rating'])/(35.**2),
