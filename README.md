@@ -1,6 +1,6 @@
 # JEDHA BOOTCAMP PROJECTS
 
-This repository contains all the projects needed to validate the certification blocks for the RNCP level 7 "Machine Learning Engineer" qualification.
+This repository contains all the projects needed to validate the certification blocks for the RNCP level 6 "Machine Learning Engineer" qualification.
 
 ## Contents
 
