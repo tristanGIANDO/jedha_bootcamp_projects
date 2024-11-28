@@ -1,6 +1,6 @@
 # Projet Speed Dating
 
-<img src="/resources/Tinder-Symbole.png" alt="tinder_symbole" style="width: 500px;">
+<img src="src/resources/Tinder-Symbole.png" alt="tinder_symbole" style="width: 500px;">
 
 ## _Quelles sont les motivations qui incitent les individus à envisager un second rendez-vous ensemble ?_
 
@@ -42,7 +42,7 @@ fig.update_layout(
 fig.show()
 ```
 
-<img src="/output_images/gender_distribution.png" alt="gender_distribution" style="width: 500px;">
+<img src="src/images/gender_distribution.png" alt="gender_distribution" style="width: 500px;">
 
 En nettoyant les données, nous avons constaté l'utilisation de plusieurs systèmes de notation. Certains participants donnaient des notes sur 10, tandis que d'autres utilisaient des pourcentages. Pour obtenir une réponse rapide, claire et fiable, et étant donné que les notes sur 10 étaient minoritaires, nous avons décidé de les exclure de l'échantillon. Cela représente 4 vagues sur les 21 initiales.
 
@@ -84,7 +84,7 @@ fig.add_trace(go.Box(
     marker_color=envs.TINDER_GREY))
 ```
 
-![perceived_value](/output_images/attractiveness_prediction.png)
+![perceived_value](src/images/attractiveness_prediction.png)
 
 * La **valeur perçue** est établie à partir des évaluations collectées avant et après les rencontres. Il y a une plus grande variabilité dans la perception que les individus ont de leur propre valeur.
 * La **valeur assignée** correspond aux notes données par les partenaires. Elles sont plus concentrées, montrant une évaluation plus cohérente par les autres.
@@ -111,7 +111,7 @@ fig_df = pd.DataFrame(data)
 fig_df = fig_df.groupby("status")["mean"].mean().reset_index()
 ```
 
-![attractiveness](/output_images/attractiveness_estimated_vs_real_filtered_waves.png)
+![attractiveness](src/images/attractiveness_estimated_vs_real_filtered_waves.png)
 
 Les participants sous-estiment l'importance de l'attirance physique dans leur décision. Ils estimaient que l'attirance représentait environ **un quart** de leur décision finale. En réalité, elle semble plutôt contribuer à environ **un tiers** de leur décision finale.
 
@@ -140,7 +140,7 @@ fig = px.histogram(mean_decision,
                            "dec_o": "Number of 'yes' decisions about meeting again"})
 ```
 
-![decision_times](/output_images/decision_times_02.png)
+![decision_times](src/images/decision_times_02.png)
 
 **La biologie est-elle déterminante dans la décision finale, ou les centres d'intérêts des individus sont-ils plus importants ?**
 Eh bien, comme le montre le graphique ci-dessous, ces critères ne semblent pas du tout jouer un rôle significatif.
@@ -172,7 +172,7 @@ data = [
 shar_df = pd.DataFrame(data)
 ```
 
-![shared_interests](/output_images/shared_interests.png)
+![shared_interests](src/images/shared_interests.png)
 
 **Mais alors, quels attributs ont eu le plus de succès ?**
 Pour répondre à cette question, nous pouvons calculer la moyenne des notes attribuées le jour même, le jour suivant, et quelques semaines plus tard pour chaque attribut, puis les comparer au nombre de "oui" pour un second rendez-vous. Cela nous permet d'estimer quels attributs ont le plus d'importance lors de la prise de décision.
@@ -211,7 +211,7 @@ df_women = sort_attributes(df, 0)
 df_men = sort_attributes(df, 1)
 ```
 
-!["best_attributes](/output_images/best_attributes.png)
+!["best_attributes](src/images/best_attributes.png)
 
 Nous avons différencié les résultats entre hommes et femmes pour voir si les attributs influençaient différemment leurs décisions. Si **être séduisant et marrant semblent être les attributs les plus importants pour les deux sexes**, les attributs qui ont entraîné le plus grand nombre de "non" sont différents.
 
@@ -231,7 +231,7 @@ df = df.groupby("goal")["iid"].count().reset_index()
 La plupart des participants étaient là pour le loisir ou pour le plaisir de rencontrer de nouvelles personnes.
 Nous noterons que seulement 4% des participants cherchaient une relation sérieuse.
 
-<img src="/output_images/goals_proportion.png" alt="goals_proportion" style="width: 500px;">
+<img src="src/images/goals_proportion.png" alt="goals_proportion" style="width: 500px;">
 
 Et quand on compare avec le nombre de réponses "oui"/"non" quant à se revoir lors d'un prochain date, même s'ils sont en dernière position, un tiers de ceux qui recherchent une relation sérieuse en obtenu une réponse favorable.
 
@@ -254,7 +254,7 @@ df_melted = df.melt(id_vars="goal",
                     value_name="Percentage")
 ```
 
-!["goals](/output_images/goals.png)
+!["goals](src/images/goals.png)
 
 ---
 
